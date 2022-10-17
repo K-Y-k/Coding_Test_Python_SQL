@@ -1,0 +1,5 @@
+1. 깃허브에서 repository생성 및 주소 url 복사
+2. 깃 데스크탑 설치 https://desktop.github.com/
+3. 깃 데스크탑 -> file -> clone repository -> url에서 복사한 url 붙여넣기
+4. local path로 생성된 폴더에 텍스트파일 넣기
+5. commit to main후 push origin하면 깃허브에 등록 완료
