@@ -1,0 +1,13 @@
+/* 문제 분석
+(1) 결과 컬럼 : BOOK_ID, AUTHOR_NAME, PUBLISHED_DATE
+(2) 조회 기준 : '경제' 카테고리에 속하는 데이터만
+(3) 출판일 기준으로 오름차순 : PUBLISHED_DATE
+*/
+
+SELECT B.BOOK_ID,	
+       A.AUTHOR_NAME,
+       DATE_FORMAT(B.PUBLISHED_DATE, '%Y-%m-%d') AS PUBLISHED_DATE
+FROM BOOK B
+JOIN AUTHOR A
+ON B.CATEGORY = '경제' AND B.AUTHOR_ID = A.AUTHOR_ID # 효율성을 위해 WHERE보다 ON에서 필터링하기
+ORDER BY B.PUBLISHED_DATE

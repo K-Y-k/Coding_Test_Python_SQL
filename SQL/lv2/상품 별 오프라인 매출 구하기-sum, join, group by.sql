@@ -1,0 +1,14 @@
+/* 문제 분석
+(1) 결과 컬럼 : PRODUCT_CODE, SALES
+(2) 조회 기준 : 상품코드 별 매출액(판매가 * 판매량) 합계를 출력
+(3) 매출액 기준으로 내림차순 : SALES
+(4) 매출액이 같다면 상품코드 기준으로 오름차순 : PRODUCT_CODE
+*/
+
+SELECT P.PRODUCT_CODE,
+       SUM(P.PRICE * S.SALES_AMOUNT) AS SALES
+FROM OFFLINE_SALE S
+JOIN PRODUCT P
+ON P.PRODUCT_ID = S.PRODUCT_ID
+GROUP BY P.PRODUCT_CODE
+ORDER BY SALES DESC, P.PRODUCT_CODE
