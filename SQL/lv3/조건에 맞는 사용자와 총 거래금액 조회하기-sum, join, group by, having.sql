@@ -1,0 +1,15 @@
+/* 문제 분석
+(1) 결과 컬럼 : USER_ID, NICKNAME, TOTAL_SALES
+(2) 조회 기준 : 거래가 완료된 중고 거래의 총금액이 70만 원 이상인 사람 데이터
+(3) 총거래금액 기준으로 오름차순 : TOTAL_SALES
+*/
+
+SELECT U.USER_ID,
+       U.NICKNAME,
+       SUM(B.PRICE) AS TOTAL_SALES    # 총 금액의 합이므로 각 USER_ID 기준으로 USED_GOODS_BOARD 테이블의 PRICE 컬럼 값의 합  
+FROM USED_GOODS_BOARD B
+JOIN USED_GOODS_USER U
+ON B.WRITER_ID = U.USER_ID AND B.STATUS = 'DONE'
+GROUP BY U.USER_ID 
+HAVING TOTAL_SALES >= 700000
+ORDER BY TOTAL_SALES

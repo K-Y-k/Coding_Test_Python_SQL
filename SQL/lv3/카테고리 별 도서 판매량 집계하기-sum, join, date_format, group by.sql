@@ -1,0 +1,13 @@
+/* 문제 분석
+(1) 결과 컬럼 : CATEGORY, TOTAL_SALES
+(2) 조회 기준 : 2022년 1월의 카테고리 별 도서 판매량을 합산
+(3) 카테고리 기준으로 오름차순 : CATEGORY
+*/
+
+SELECT B.CATEGORY,
+       SUM(S.SALES) AS TOTAL_SALES # 각 책들의 총 판매량이므로 BOOK_SALES 테이블의 SALES 컬럼의 총합이다.
+FROM BOOK B
+JOIN BOOK_SALES S
+ON B.BOOK_ID = S.BOOK_ID AND DATE_FORMAT(S.SALES_DATE, '%Y-%m') = '2022-01'
+GROUP BY B.CATEGORY
+ORDER BY B.CATEGORY
