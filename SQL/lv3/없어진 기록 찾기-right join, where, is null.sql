@@ -1,0 +1,13 @@
+/* 문제 분석
+(1) 결과 컬럼 : ANIMAL_ID, NAME
+(2) 조회 기준 : 입양을 간 기록은 있는데, 보호소에 들어온 기록이 없는 동물만
+(3) 아이디 기준으로 오름차순 : ANIMAL_ID
+*/
+
+SELECT O.ANIMAL_ID,
+       O.NAME
+FROM ANIMAL_INS I
+RIGHT JOIN ANIMAL_OUTS O
+ON I.ANIMAL_ID = O.ANIMAL_ID
+WHERE I.INTAKE_CONDITION IS NULL
+ORDER BY ANIMAL_ID
