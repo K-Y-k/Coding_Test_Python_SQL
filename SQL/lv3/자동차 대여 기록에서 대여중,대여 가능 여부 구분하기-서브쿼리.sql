@@ -1,0 +1,26 @@
+/* 문제 분석
+(1) 결과 컬럼 : CAR_ID, AVAILABILTIY
+(2) 조회 기준 : 2022년 10월 16일에 대여 중인 자동차인 경우 '대여중' 이라고 표시하고, 대여 중이지 않은 자동차인 경우 '대여 가능'을 표시
+(3) 아이디 기준으로 내림차순 : CAR_ID
+*/
+
+# IN절, DISTINCT 사용 / GROUP BY 사용x
+SELECT DISTINCT CAR_ID, 
+      IF(CAR_ID IN (SELECT DISTINCT CAR_ID 
+                    FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY 
+                    WHERE '2022-10-16' BETWEEN START_DATE AND END_DATE), '대여중', '대여 가능') 
+                    AS AVAILABILTIY 
+FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY 
+ORDER BY CAR_ID DESC
+
+
+# MAX 활용
+SELECT CAR_ID,
+       CASE 
+       WHEN MAX(END_DATE) >= '2022-10-16' THEN '대여중'
+       ELSE '대여 가능'
+       END AS AVAILABILITY
+FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY 
+WHERE START_DATE < '2022-10-17'
+GROUP BY CAR_ID
+ORDER BY CAR_ID DESC
