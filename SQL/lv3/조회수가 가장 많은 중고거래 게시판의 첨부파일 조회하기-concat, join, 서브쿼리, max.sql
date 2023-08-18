@@ -1,0 +1,26 @@
+/* 문제 분석
+(1) 결과 컬럼 : FILE_PATH
+(2) 조회 기준 : 두 테이블에서 조회수가 가장 높은 중고거래 게시물에 대한 첨부파일 경로
+(3) 아이디 기준으로 내림차순 : FILE_ID
+*/
+
+# 내가 푼 WHERE절 서브쿼리 방식
+SELECT CONCAT('/home/grep/src/', F.BOARD_ID, '/', F.FILE_ID, F.FILE_NAME, F.FILE_EXT) AS FILE_PATH
+FROM USED_GOODS_BOARD B
+JOIN USED_GOODS_FILE F
+ON B.BOARD_ID = F.BOARD_ID
+WHERE B.VIEWS = (SELECT MAX(VIEWS)
+                 FROM USED_GOODS_BOARD)
+ORDER BY FILE_PATH DESC
+
+
+
+# DB 부하를 제일 최소화로 줄이는 방법
+SELECT CONCAT('/home/grep/src/', F.BOARD_ID, '/', FILE_ID, FILE_NAME, FILE_EXT) AS FILE_PATH
+FROM USED_GOODS_FILE F
+JOIN (SELECT BOARD_ID
+      FROM USED_GOODS_BOARD
+      ORDER BY VIEWS DESC
+      LIMIT 1) B
+ON F.BOARD_ID = B.BOARD_ID
+ORDER BY FILE_PATH DESC
