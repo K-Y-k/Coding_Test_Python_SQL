@@ -1,0 +1,21 @@
+/* 문제 분석
+(1) 결과 컬럼 : AUTHOR_ID, AUTHOR_NAME, CATEGORY, TOTAL_SALES
+(2) 조회 기준 : 2022년 1월의 도서 판매 데이터를 기준으로 카테고리 별 매출액
+(3) 저자 아이디 기준으로 오름차순 : A.AUTHOR_ID
+(4) 저자 아이디 같다면 카테고리 기준으로 내림차순 : BS.CATEGORY
+*/
+
+SELECT A.AUTHOR_ID,
+       A.AUTHOR_NAME,
+       BS.CATEGORY,
+       SUM(BS.TOTAL_SALES) AS TOTAL_SALES
+FROM AUTHOR A
+JOIN (SELECT B.AUTHOR_ID,
+             B.CATEGORY,
+             (B.PRICE * S.SALES) AS TOTAL_SALES
+      FROM BOOK B
+      JOIN BOOK_SALES S
+      ON B.BOOK_ID = S.BOOK_ID AND DATE_FORMAT(S.SALES_DATE, '%Y-%m') = '2022-01') BS
+ON A.AUTHOR_ID = BS.AUTHOR_ID
+GROUP BY 1, 2, 3
+ORDER BY 1, 3 DESC
