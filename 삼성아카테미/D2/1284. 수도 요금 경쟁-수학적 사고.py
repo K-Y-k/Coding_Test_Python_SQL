@@ -1,26 +1,35 @@
+# 내가 시도한 방식 = 일부 테케만 맞음
+
 T = int(input())
 
 for test_case in range(1, T + 1):
-    N = int(input())
+    P, Q, R, S, W = map(int, input().split())
     
-    count_li = []
-    answer_count = 0
-    multi_count = 1
+    anwer = 0
     
+    if W * P <= Q:
+        answer = W * P
+    else:
+        answer = Q + (W - R) * S
     
-    while True:
-        if len(count_li) == 10:
-            break
-        
-        a = N * multi_count
-        
-        for i in str(a):
-            if i not in count_li:
-                count_li.append(i)
-            
-            
-        multi_count += 1
-        answer_count = a
-        
+    print('#' + str(test_case), answer)
 
-    print('#' + str(test_case), answer_count)
+
+
+# 정답
+
+T = int(input())
+
+for test_case in range(1, T + 1):
+    P, Q, R, S, W = map(int, input().split())
+    
+    A = W * P
+    B = Q
+    
+    if W > R:
+        B += (W - R) * S
+    
+    if A > B:
+        print('#' + str(test_case), B)
+    else:
+        print('#' + str(test_case), A)
