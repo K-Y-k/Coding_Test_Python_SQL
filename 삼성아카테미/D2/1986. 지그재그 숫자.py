@@ -1,3 +1,6 @@
+# 짝수번째 일 때는 빼기
+# 홀수번째 일 때는 더하기를 적용
+
 T = int(input())
 
 for test_case in range(1, T + 1):

@@ -17,6 +17,7 @@ for test_case in range(1, T + 1):
 
 
 # 정답
+# 문제에 대한 이해가 부족했음
 
 T = int(input())
 
