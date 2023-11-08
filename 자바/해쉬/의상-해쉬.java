@@ -10,15 +10,20 @@ public class Solution {
     public int solution(String[][] clothes) {
         Map<String, Integer> clothesDic = new HashMap<>(); // 해쉬 선언
 
-        for (String[] item : clothes) {                                  // 받아온 clothes의 값과 카테고리를 모두 조회해서
-            String type = item[1];                                       // 옷의 카테고리(타입)
-            clothesDic.put(type, clothesDic.getOrDefault(type, 0) + 1);  // 해쉬에 없으면 착용하지 않는 경우의 수까지 생각해서 2부터 시작하게 초기화한다.
+        for (String[] item : clothes) {                   // 받아온 clothes의 값과 카테고리를 모두 조회해서
+            String type = item[1];                        // 옷의 카테고리(타입)
+
+            if(!clothesDic.containsKey(type)) {           // 해쉬에 없으면 착용하지 않는 경우의 수까지 생각해서 2부터 시작하게 초기화한다.
+                clothesDic.put(type, 2);
+            } else {                                      // 해쉬에 있으면 +1 해줌
+                clothesDic.put(type, clothesDic.get(type) + 1);
+            }
         }
 
         int answer = 1;                           // 모두 곱셈하는 조합 연산을 위해 1로 초기화
 
         for (int count : clothesDic.values()) {  // 최종 카운팅한 것을 가져와
-            answer *= (count + 1);               // 각 카테고리의 카운팅한 개수 + 1을 곱해줌
+            answer *= count;                     // 각 카테고리의 카운팅한 개수를 곱해줌
         }
 
         return answer - 1;                       // 모두 착용하지 않는 경우를 제외하고 반환
