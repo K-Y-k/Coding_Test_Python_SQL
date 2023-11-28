@@ -6,8 +6,6 @@
 #        2. 심사 받아야할 사람의 수(n)보다 적은 경우에는 시간이 부족했던 것이므로 주어진 시간을 늘린다.
 
 def solution(n, times):
-    answer = 0
-    
     start = min(times)                  # 문제에서 입국심사 기다리는 사람은 최소 1명이상이라고 했으므로 1명의 최소 대기시간으로 초기화
     end = max(times) * n                # 최대가 될 수 있는 대기시간
     
@@ -22,9 +20,8 @@ def solution(n, times):
                 break                   # 반복 종료
         
         if total_people >= n:           # 심사한 사람의 수가 심사 받아야할 사람의 수(n)보다 많거나 같은 경우 시간이 충분했던 것이므로
-            answer = mid                # 정답을 현재 기준 값으로 갱신하고
             end = mid - 1               # 중간값 기준 왼쪽 범위로 탐색 경로 설정
         else:                           # 심사한 사람의 수가 심사 받아야할 사람의 수(n)보다 적은 경우
             start = mid + 1             # 중간값 기준 오른쪽 범위로 탐색 경로 설정
     
-    return answer
+    return start                        # while문을 돌리면서 적용된 start가 곧 최소한의 시간
