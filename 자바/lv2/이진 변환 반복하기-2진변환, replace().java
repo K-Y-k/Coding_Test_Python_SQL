@@ -7,12 +7,8 @@ class Solution {
         while (!s.equals("1")) {                         // "1"이 될 때까지 반복
             String[] s_arr = s.split("");
 
-            for (String sa : s_arr) {
-                if (sa.equals("0")) {
-                    s = s.replace("0", "");
-                    deleteZeroCount++;
-                }
-            }
+            String s_removeZero = s.replace("0", "");  // replace는 모두 변경되므로
+            deleteZeroCount += s.length() - s_removeZero.length();     // 기존 0이 있었던 길이에서 0을 제거한 문자의 길이를 뺀 값이 0을 제거한 개수이다.
 
             // s = s.replaceAll("0", "");                // 전체를 기준으로 변경하려면
             s = Integer.toBinaryString(s.length());      // 현재 10진수를 2진수로 변환 후 String형으로 변환
