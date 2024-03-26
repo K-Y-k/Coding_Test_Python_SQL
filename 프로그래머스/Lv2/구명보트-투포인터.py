@@ -47,7 +47,7 @@ def solution(people, limit):
     left = 0                                         # 시작 값
     right = len(people)-1                            # 끝의 값
     
-    while left <= right:                             # 시작 값과 끝의 값이 엇갈리지 않을 때까지 반복
+    while left <= right:                             # 시작 값과 끝의 값이 엇갈리지 않을 때까지 반복하고 문제에서 탑승 인원이 1명까지 가능하므로 <=이다.
         if people[left] + people[right] <= limit:    # 조건에 맞을 경우
             left += 1                                # 가벼운 사람과 무거운 사람을 같이 태워 보낸 것으로 서로 한칸씩 땡긴다.
             right -= 1
